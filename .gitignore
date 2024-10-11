@@ -1,3 +1,5 @@
 .terraform/*
+.gitattributes
+.gitignore
 .terraform.lock.hcl
 terraform.tfstate
