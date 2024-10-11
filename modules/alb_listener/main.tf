@@ -1,5 +1,3 @@
-# modules/alb_listener/main.tf
-
 resource "aws_alb_listener" "this" {
   load_balancer_arn = var.load_balancer_arn
   port              = var.port

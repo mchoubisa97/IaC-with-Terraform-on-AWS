@@ -1,5 +1,3 @@
-# modules/target_group/main.tf
-
 resource "aws_lb_target_group" "this" {
   name     = var.name
   port     = var.port

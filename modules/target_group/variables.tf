@@ -1,5 +1,3 @@
-# modules/target_group/variables.tf
-
 variable "name" {
   type = string
 }

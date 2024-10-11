@@ -1,5 +1,3 @@
-# modules/alb/main.tf
-
 resource "aws_alb" "this" {
   name                 = var.name
   internal             = var.internal

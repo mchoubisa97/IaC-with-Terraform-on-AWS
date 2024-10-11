@@ -1,5 +1,3 @@
-# modules/alb_listener/variables.tf
-
 variable "load_balancer_arn" {
   type = string
 }
