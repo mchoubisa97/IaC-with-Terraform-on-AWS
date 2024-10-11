@@ -35,12 +35,12 @@ module "webserver2" {
 }
 
 module "alb" {
-  source           = "./modules/alb"
-  name             = "myalb"
-  internal         = false
+  source             = "./modules/alb"
+  name               = "myalb"
+  internal           = false
   load_balancer_type = "application"
-  security_groups  = [module.web_security_group.security_group_id]
-  subnets          = [module.vpc.subnet1_id, module.vpc.subnet2_id]
+  security_groups    = [module.web_security_group.security_group_id]
+  subnets            = [module.vpc.subnet1_id, module.vpc.subnet2_id]
 
   tags = {
     name = "web"
@@ -58,23 +58,23 @@ module "target_group" {
 }
 
 module "target_group_attachment_1" {
-  source            = "./modules/target_group_attachment"
-  target_group_arn  = module.target_group.tg_arn
-  target_id         = module.webserver1.instance_id
-  port              = 80
+  source           = "./modules/target_group_attachment"
+  target_group_arn = module.target_group.tg_arn
+  target_id        = module.webserver1.instance_id
+  port             = 80
 }
 
 module "target_group_attachment_2" {
-  source            = "./modules/target_group_attachment"
-  target_group_arn  = module.target_group.tg_arn
-  target_id         = module.webserver2.instance_id
-  port              = 80
+  source           = "./modules/target_group_attachment"
+  target_group_arn = module.target_group.tg_arn
+  target_id        = module.webserver2.instance_id
+  port             = 80
 }
 
 module "alb_listener" {
-  source             = "./modules/alb_listener"
-  load_balancer_arn  = module.alb.alb_arn
-  target_group_arn   = module.target_group.tg_arn
-  port               = 80
-  protocol           = "HTTP"
+  source            = "./modules/alb_listener"
+  load_balancer_arn = module.alb.alb_arn
+  target_group_arn  = module.target_group.tg_arn
+  port              = 80
+  protocol          = "HTTP"
 }
