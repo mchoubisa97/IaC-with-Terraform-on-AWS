@@ -27,3 +27,8 @@ variable "instance_name" {
   description = "Name of the EC2 instance"
   type        = string
 }
+
+variable "iam_instance_profile" {
+  description = "The IAM instance profile to attach to the instance"
+  type        = string
+}

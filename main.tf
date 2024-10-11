@@ -14,6 +14,12 @@ module "s3_bucket" {
   bucket_name = "mukulterraform2023project"
 }
 
+module "iam_role" {
+  source         = "./modules/iam_role"
+  role_name      = "s3-access-role"
+  s3_bucket_name = module.s3_bucket.bucket_name
+}
+
 module "webserver1" {
   source            = "./modules/ec2_instance"
   ami               = "ami-0866a3c8686eaeeba"
@@ -22,6 +28,7 @@ module "webserver1" {
   subnet_id         = module.vpc.subnet1_id
   user_data         = base64encode(file("userdata_1.sh"))
   instance_name     = "webserver1"
+  iam_instance_profile = module.iam_role.instance_profile_name
 }
 
 module "webserver2" {
@@ -32,6 +39,7 @@ module "webserver2" {
   subnet_id         = module.vpc.subnet2_id
   user_data         = base64encode(file("userdata_2.sh"))
   instance_name     = "webserver2"
+  iam_instance_profile = module.iam_role.instance_profile_name
 }
 
 module "alb" {
