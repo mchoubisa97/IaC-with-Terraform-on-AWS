@@ -41,7 +41,7 @@ An AWS account with sufficient permissions
 
 Installation & Deployment
 Clone the repository
-git clone https://github.com/yourusername/terraform-aws-iac.git
+git clone https://github.com/mchoubisa97/terraform-aws-iac.git
 cd terraform-aws-iac
 
 Initialize Terraform
