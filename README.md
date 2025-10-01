@@ -1,85 +1,66 @@
-AWS Infrastructure as Code (IaC) with Terraform
+Infrastructure as Code (IaC) with Terraform on AWS
 
-This repository contains a modular Terraform setup for provisioning AWS infrastructure for web applications. The project automates the deployment of a scalable and secure environment, including EC2 instances, VPC, ALB, S3, IAM roles, and security groups.
-
-
-Project Overview
-The goal of this project is to leverage Terraform modules to create reusable, scalable, and maintainable AWS infrastructure. It demonstrates best practices in Infrastructure as Code (IaC), ensuring consistent and automated provisioning.
-
-Key Features:
-Modular structure for easy reuse and scalability
-Automated EC2 instance provisioning with user-data scripts
-Load balancing using AWS Application Load Balancer (ALB)
-Secure networking with custom VPC and security groups
-Object storage integration using S3 buckets
-IAM roles for secure access and permissions
+This repository contains a modular Terraform setup for provisioning and managing AWS infrastructure, designed to automate the deployment of web applications in a scalable and secure manner.
 
 
-Architecture Diagram
-             +----------------+
-             |   Internet     |
-             +-------+--------+
-                     |
-              +------v-------+
-              | Application  |
-              | Load Balancer|
-              +------+-------+
-                     |
-          +----------+----------+
-          |                     |
-+---------v--------+   +--------v--------+
-| EC2 Instance 1   |   | EC2 Instance 2  |
-|  (Web App)       |   |  (Web App)      |
-+-----------------+   +-----------------+
-          |
-          v
-      +---------+
-      | S3 Bucket|
-      +---------+
+Overview
+This project demonstrates Infrastructure as Code using Terraform to automate AWS resources. It includes modular configurations for networking, compute, storage, and application load balancing. The setup is reusable, scalable, and suitable for deploying web applications with best practices for security and automation.
 
 
-Terraform Workflow
-Clone repo -> terraform init -> terraform plan -> terraform apply -> deployed AWS resources
+Features
+Modular Terraform design for easy maintenance and reuse
+Automated provisioning of:
+VPC with subnets
+EC2 instances
+S3 buckets
+Application Load Balancer (ALB)
+Target groups and listeners
+Security groups
+IAM roles
+EC2 user-data scripts for automated application setup
+Supports scalability and reproducibility for cloud environments
 
 
-Step-by-step Instructions:
-Clone Repository:
-git clone <repo-url>
-cd <repo-folder>
+Modules
+alb – Creates Application Load Balancer
+alb_listener – Configures ALB listeners
+ec2_instance – Provisions EC2 instances with user-data scripts
+iam_role – Creates IAM roles and policies
+s3_bucket – Provisions S3 buckets with proper permissions
+security_group – Configures security groups for EC2 & ALB
+target_group – Defines target groups for load balancing
+target_group_attachment – Attaches EC2 instances to target groups
+vpc – Creates VPC, subnets, and route tables
 
-Initialize Terraform:
+
+Prerequisites
+Terraform >= 1.5.0
+AWS CLI configured with proper credentials
+An AWS account with sufficient permissions
+
+
+Installation & Deployment
+Clone the repository
+git clone https://github.com/yourusername/terraform-aws-iac.git
+cd terraform-aws-iac
+
+Initialize Terraform
 terraform init
 
-Review Infrastructure Plan:
+Plan the deployment
 terraform plan
 
-Apply Terraform Scripts:
+Apply the configuration
 terraform apply
 
-EC2 User-Data: Automatically configures instances (web server setup, app deployment)
-Access Application: Through AWS ALB DNS
+Confirm the plan when prompted.
+Terraform will provision all resources in your AWS account.
+Destroy the infrastructure (optional)
+terraform destroy
 
-Terraform Modules
-| Module                      | Purpose                                             |
-| --------------------------- | --------------------------------------------------- |
-| **vpc**                     | Creates VPC, subnets, internet gateway, and routing |
-| **security_group**          | Defines security rules for EC2 and ALB              |
-| **ec2_instance**            | Launches EC2 instances with user-data scripts       |
-| **alb**                     | Configures Application Load Balancer                |
-| **alb_listener**            | Listens to HTTP/HTTPS traffic on ALB                |
-| **target_group**            | Defines target groups for ALB routing               |
-| **target_group_attachment** | Associates EC2 instances with ALB target groups     |
-| **s3_bucket**               | Creates S3 buckets for storage                      |
-| **iam_role**                | Configures IAM roles and policies                   |
 
-Tools & Tech
-Terraform – Infrastructure as Code
-AWS Services – VPC, EC2, ALB, Target Groups, Security Groups, S3, IAM
-Bash/Shell Scripts – Automate EC2 setup via user-data
-GitHub – Version control
-
-Outcomes
-Fully automated AWS infrastructure provisioning
-Reusable Terraform modules for scaling applications
-Secure and reliable environment with proper IAM and security groups
-Quick deployment of web applications through ALB and EC2
+Usage
+EC2 instances are automatically configured using user-data scripts.
+ALB distributes traffic across EC2 instances.
+S3 buckets can be used for application storage or static assets.
+Add or modify modules to customize infrastructure for your applications.
